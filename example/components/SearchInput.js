@@ -1,6 +1,7 @@
-import React from 'react';
-import {search}  from '../../dist/smart-table-react';
+import React from 'preact';
+import {search}  from '../smart-table-preact';
 import {debounce} from './helpers'
+const {h} = React;
 
 export default search(class SearchInput extends React.Component {
   constructor (props) {

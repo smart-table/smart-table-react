@@ -7,14 +7,16 @@ import sort from './lib/sort';
 import summary from './lib/summary';
 import filter from './lib/filters';
 
-
-export {
-  table,
-  loadingIndicator,
-  HOCFactory,
-  pagination,
-  search,
-  sort,
-  summary,
-  filter
-};
+export default function (react) {
+  const HOCF = HOCFactory(react);
+  return {
+    table: table(HOCF),
+    loadingIndicator: loadingIndicator(HOCF),
+    HOCFactory: HOCF,
+    pagination: pagination(HOCF),
+    search: search(HOCF),
+    sort: sort(HOCF),
+    summary: summary(HOCF),
+    filter: filter(HOCF)
+  };
+}

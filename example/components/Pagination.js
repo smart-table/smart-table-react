@@ -1,5 +1,6 @@
-import React from 'react';
-import {pagination} from '../../dist/smart-table-react';
+import React from 'preact';
+import {pagination} from '../smart-table-preact';
+const {h} = React;
 
 export default pagination(({stDirective, colSpan, stState}) => {
   const isPreviousDisabled = !stDirective.isPreviousPageEnabled();

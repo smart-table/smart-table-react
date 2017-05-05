@@ -1,5 +1,6 @@
-import React from 'react';
+import React from 'preact';
 import {debounce} from './helpers';
+const {h} = React;
 
 export default class RangeSizeInput extends React.Component {
   constructor (props) {

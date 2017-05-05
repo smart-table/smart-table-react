@@ -1,7 +1,7 @@
-import React from 'react';
-import {filter} from '../../dist/smart-table-react';
+import React from 'preact';
+import {filter} from '../smart-table-preact';
 import {debounce} from './helpers';
-
+const {h} = React;
 
 export default filter(class FilterInput extends React.Component {
   constructor (props) {

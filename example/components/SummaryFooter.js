@@ -1,5 +1,6 @@
-import React from 'react';
-import {summary} from '../../dist/smart-table-react';
+import React from 'preact';
+import {summary} from '../smart-table-preact';
+const {h}=React;
 
 export default summary(({stState, colSpan}) => {
   const {page, size, filteredCount} =stState;

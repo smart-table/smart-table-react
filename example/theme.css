@@ -1,6 +1,8 @@
 body {
     margin: 0;
     color: #464646;
+    font-family:sans-serif;
+    font-weight: lighter;
 }
 
 body * {
@@ -20,7 +22,7 @@ table {
 }
 
 th, td {
-    padding: 0.8em;
+    padding: 0.4em;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -64,7 +66,7 @@ tbody > tr:not(:first-child) {
 }
 
 tbody > tr:nth-child(2n) {
-    background: #e5f2fa;
+    background: #edf3f7;
 }
 
 [data-st-pagination] {
@@ -74,9 +76,11 @@ tbody > tr:nth-child(2n) {
 input {
     display: inline-block;
     width: 100%;
-    padding: 0.2em;
-    font-size: 1rem;
+    padding: 0.3em;
     border: 1px solid #7c7c7c;
+    border-radius: 2px;
+    font:inherit;
+    color: #708ae6;
 }
 
 input:focus {

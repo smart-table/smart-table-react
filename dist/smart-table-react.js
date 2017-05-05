@@ -1,4 +1,12 @@
-import React from 'react';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global['smart-table-react'] = factory());
+}(this, (function () { 'use strict';
+
+var table = function (HOCFactory) {
+  return HOCFactory(({table}) => table, {}, 'onDisplayChange');
+};
 
 function pointer (path) {
 
@@ -40,41 +48,45 @@ const mapConfProp = (map) => (props) => {
   return output;
 };
 
+var HOCFactory = function ({Component, createElement}) {
+  return function connect (directive, confMap, event, statePter) {
+    const propMapper = mapConfProp(confMap);
+    const pter = statePter ? pointer(statePter) : {get: () => ({})};
 
-function connect (directive, confMap, event, statePter) {
-  const propMapper = mapConfProp(confMap);
-  const pter = statePter ? pointer(statePter) : {get: () => ({})};
+    return function hoc (Wrapped) {
+      class HOC extends Component {
+        constructor (props) {
+          const {smartTable} = props;
+          const conf = Object.assign({table: smartTable}, propMapper(props));
+          super(props);
+          this.directive = directive(conf);
+          this.state = {stState: pter.get(smartTable.getTableState())};
+        }
 
-  return function hoc (Wrapped) {
-    return class HOC extends React.Component {
-      constructor (props, context) {
-        const {smartTable} = props;
-        const conf = Object.assign({table: smartTable}, propMapper(props));
-        super(props);
-        this.directive = directive(conf);
-        this.state = {stState: pter.get(smartTable.getTableState())};
+        componentDidMount () {
+          this.directive[event](newStateSlice => {
+            this.setState({stState: newStateSlice});
+          });
+        }
+
+        componentWillUnmount () {
+          this.directive.off();
+        }
+
+        render () {
+          const stState = this.state.stState;
+          const stDirective = this.directive;
+          const children = this.props.children || [];
+          return createElement(Wrapped, Object.assign({stState, stDirective}, this.props), children);
+        }
       }
 
-      componentDidMount () {
-        this.directive[event](newStateSlice => {
-          this.setState({stState: newStateSlice});
-        });
-      }
+      HOC.displayName = `smart-table-hoc(${Wrapped.displayName || Wrapped.name || 'Component'})`;
 
-      componentWillUnmount () {
-        this.directive.off();
-      }
-
-      render () {
-        const stState = this.state.stState;
-        const stDirective = this.directive;
-        return React.createElement(Wrapped, Object.assign({stState, stDirective}, this.props), null);
-      }
+      return HOC;
     };
-  };
-}
-
-var table = connect(({table}) => table, {}, 'onDisplayChange');
+  }
+};
 
 function proxyListener (eventMap) {
   return function ({emitter}) {
@@ -109,7 +121,7 @@ function proxyListener (eventMap) {
 const TOGGLE_SORT = 'TOGGLE_SORT';
 
 const PAGE_CHANGED = 'CHANGE_PAGE';
-const EXEC_CHANGED = 'EXEC_STARTED';
+const EXEC_CHANGED = 'EXEC_CHANGED';
 const FILTER_CHANGED = 'FILTER_CHANGED';
 const SUMMARY_CHANGED = 'SUMMARY_CHANGED';
 const SEARCH_CHANGED = 'SEARCH_CHANGED';
@@ -229,20 +241,48 @@ const sort = sortDirective;
 const filter = filterDirective;
 const workingIndicator = workingIndicatorDirective;
 
-var loadingIndicator = connect(workingIndicator, {}, 'onExecutionChange');
+var loadingIndicator = function (HOCFactory) {
+  return HOCFactory(workingIndicator, {}, 'onExecutionChange');
+};
 
-var pagination = connect(slice,{},'onSummaryChange','slice');
+var pagination = function (HOCFactory) {
+  return HOCFactory(slice, {}, 'onSummaryChange', 'slice');
+};
 
-var search$2 = connect(search, {stScope: 'scope'}, 'onSearchChange','search');
+var search$2 = function (HOCFactory) {
+  return HOCFactory(search, {stScope: 'scope'}, 'onSearchChange', 'search');
+};
 
-var sort$1 = connect(sort, {stSort: 'pointer', stSortCycle: 'cycle'}, 'onSortToggle','sort');
+var sort$1 = function (HOCFactory) {
+  return HOCFactory(sort, {stSort: 'pointer', stSortCycle: 'cycle'}, 'onSortToggle', 'sort');
+};
 
-var summary$1 = connect(summary, {}, 'onSummaryChange');
+var summary$1 = function (HOCFactory) {
+  return HOCFactory(summary, {}, 'onSummaryChange');
+};
 
-var filters = connect(filter, {
-  stFilter: 'pointer',
-  stFilterType: 'type',
-  stFilterOperator: 'operator'
-}, 'onFilterChange', 'filter');
+var filter$2 = function (HOCFactory) {
+  return HOCFactory(filter, {
+    stFilter: 'pointer',
+    stFilterType: 'type',
+    stFilterOperator: 'operator'
+  }, 'onFilterChange', 'filter');
+};
 
-export { table, loadingIndicator, connect as HOCFactory, pagination, search$2 as search, sort$1 as sort, summary$1 as summary, filters as filter };
+var index = function (react) {
+  const HOCF = HOCFactory(react);
+  return {
+    table: table(HOCF),
+    loadingIndicator: loadingIndicator(HOCF),
+    HOCFactory: HOCF,
+    pagination: pagination(HOCF),
+    search: search$2(HOCF),
+    sort: sort$1(HOCF),
+    summary: summary$1(HOCF),
+    filter: filter$2(HOCF)
+  };
+};
+
+return index;
+
+})));

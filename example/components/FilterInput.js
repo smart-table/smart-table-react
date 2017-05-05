@@ -1,6 +1,7 @@
-import React from 'react';
-import {filter} from '../../dist/smart-table-react';
+import React from 'preact';
+import {filter} from '../smart-table-preact';
 import {debounce} from './helpers';
+const {h}=React;
 
 const filterToType = (stType) => {
   switch (stType) {
@@ -37,8 +38,8 @@ export default filter(class FilterInput extends React.Component {
         {label}
         <input type={filterToType(stFilterType)}
                placeholder={this.props.placeholder}
-               value={this.state.text}
-               onChange={this.onChange}/>
+               value={this.state.value}
+               onInput={this.onChange}/>
       </label>
     );
   }

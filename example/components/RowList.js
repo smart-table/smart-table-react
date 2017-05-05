@@ -1,5 +1,6 @@
-import React from 'react';
-import {table} from '../../dist/smart-table-react';
+import React from 'preact';
+import {table} from '../smart-table-preact';
+const {h} = React;
 
 function Row ({value}) {
   const {name:{first:firstName, last:lastName}, gender, birthDate, size}=value;
