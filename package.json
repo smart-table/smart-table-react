@@ -1,6 +1,6 @@
 {
   "name": "smart-table-react",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "react or preact binding for smart-table",
   "main": "./dist/smart-table-react.js",
   "jsnext:main": "index.js",
