@@ -3,4 +3,4 @@
 
 More details on [Smart table website](). 
 
-[Demo]()
+[Demo](https://smart-table.github.io/smart-table-react/example/)
