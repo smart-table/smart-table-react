@@ -8,11 +8,11 @@ export default {
   plugins: [
     replace({"import reactDom from 'react-dom'":'const reactDom = React'}),
     node({jsnext: true}),
-    commonjs(),
     buble({
       target: {chrome: 52},
       jsx: 'h'
-    })
+    }),
+    commonjs(),
   ],
   dest: "./example/bundle.js",
   moduleName: "bundle",
