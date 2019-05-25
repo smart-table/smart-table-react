@@ -14,10 +14,10 @@ export default {
       'const {h} = React;':''
     }),
     node({jsnext: true}),
-    commonjs(),
     buble({
       target: {chrome: 52}
-    })
+    }),
+    commonjs(),
   ],
   dest: "./example/bundle.js",
   moduleName: "bundle",
