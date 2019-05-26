@@ -1,11 +1,13 @@
 import node from 'rollup-plugin-node-resolve';
 
 export default {
-  entry: "./index",
+  input: './index',
+  output: {
+    file: './dist/smart-table-react.js',
+    format: 'umd',
+    name: 'smart-table-react'
+  },
   plugins: [
-    node({jsnext: true}),
+    node(),
   ],
-  dest: `./dist/smart-table-react.js`,
-  format: "umd",
-  moduleName: `smart-table-react`
 };

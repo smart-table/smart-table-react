@@ -9,7 +9,6 @@ import FilterInput from './components/FilterInput';
 import SelectInput from './components/FilterOptions';
 import RangeSizeInput from './components/FilterSizeRange';
 import reactDom from 'react-dom';
-const {h} = React;
 
 import table from 'smart-table-core';
 

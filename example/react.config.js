@@ -6,20 +6,22 @@ import buble from 'rollup-plugin-buble';
 const env = process.env.NODE_ENV;
 
 export default {
-  entry: "./example/index.js",
+  input: './example/index.js',
+  output: {
+    file: './example/bundle.js',
+    format: 'iife',
+    name: 'bundle',
+    sourcemap: 'inline',
+  },
   plugins: [
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
       'preact': 'react',
-      'const {h} = React;':''
     }),
-    node({jsnext: true}),
+    node(),
     buble({
-      target: {chrome: 52}
+      target: {chrome: 71}
     }),
     commonjs(),
   ],
-  dest: "./example/bundle.js",
-  moduleName: "bundle",
-  format: "iife"
 };
