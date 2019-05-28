@@ -15,6 +15,7 @@ export default {
   },
   plugins: [
     replace({
+      'onChange': 'onInput',
       'process.env.NODE_ENV': JSON.stringify(env),
       'react-dom': 'preact',
     }),

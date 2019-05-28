@@ -27,7 +27,7 @@ export default search(class SearchInput extends React.Component {
         <input type="search"
                placeholder={this.props.placeholder}
                value={this.state.text}
-               onInput={this.onChange}/>
+               onChange={this.onChange}/>
       </label>
     );
   }
