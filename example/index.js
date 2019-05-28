@@ -10,9 +10,9 @@ import SelectInput from './components/FilterOptions';
 import RangeSizeInput from './components/FilterSizeRange';
 import reactDom from 'react-dom';
 
-import table from 'smart-table-core';
+import {smartTable} from 'smart-table-core';
 
-const t = table({data, tableState: {sort: {}, filter: {}, slice: {page: 1, size: 15}}});
+const t = smartTable({data, tableState: {sort: {}, filter: {}, slice: {page: 1, size: 15}}});
 
 class Table extends React.Component {
   constructor (props) {
