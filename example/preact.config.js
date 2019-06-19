@@ -17,6 +17,7 @@ export default {
     replace({
       'onChange': 'onInput',
       'process.env.NODE_ENV': JSON.stringify(env),
+      'react': 'preact',
       'react-dom': 'preact',
     }),
     node(),

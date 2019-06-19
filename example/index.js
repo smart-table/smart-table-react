@@ -1,4 +1,4 @@
-import React from 'preact';
+import React from 'react';
 import SortableHeader from './components/SortableHeader';
 import LoadingOverlay from './components/LoadingOverlay';
 import SummaryFooter from './components/SummaryFooter';

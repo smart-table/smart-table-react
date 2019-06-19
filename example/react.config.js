@@ -16,7 +16,6 @@ export default {
   plugins: [
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
-      'preact': 'react',
     }),
     node(),
     buble({
