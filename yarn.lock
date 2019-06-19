@@ -810,10 +810,10 @@ set-value@^2.0.0:
     is-plain-object "^2.0.3"
     split-string "^3.0.1"
 
-smart-table-core@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/smart-table-core/-/smart-table-core-3.0.3.tgz#0df34e644e277359331bdff7177bbed4a8881020"
-  integrity sha512-iNQNhc19SszEie3Pc90g1+YJOJmstoJ8QbHjz5fT1YTKzug9Z1a1lEVGAO+kDNiU/MmYMtD4qaa9GDBMtJmzKQ==
+smart-table-core@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/smart-table-core/-/smart-table-core-3.0.4.tgz#591d0569c8d89b70c8ba6304a01e0999af8cd9e0"
+  integrity sha512-JSg/UPaX/BXEb1QgLdF60jTQkb9Ps3WSx1zwzduAiQYqgvOwVx0IupArpAhr7W9mocPOLtaS1aOP0iwe5zCNMQ==
   dependencies:
     smart-table-events "^1.0.10"
     smart-table-filter "^2.0.4"
