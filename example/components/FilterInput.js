@@ -39,7 +39,7 @@ export default filter(class FilterInput extends React.Component {
         <input type={filterToType(stFilterType)}
                placeholder={this.props.placeholder}
                value={this.state.value}
-               onInput={this.onChange}/>
+               onChange={this.onChange}/>
       </label>
     );
   }

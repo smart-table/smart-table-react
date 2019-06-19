@@ -1,4 +1,4 @@
-import React from 'preact';
+import React from 'react';
 import SortableHeader from './components/SortableHeader';
 import LoadingOverlay from './components/LoadingOverlay';
 import SummaryFooter from './components/SummaryFooter';
@@ -9,11 +9,10 @@ import FilterInput from './components/FilterInput';
 import SelectInput from './components/FilterOptions';
 import RangeSizeInput from './components/FilterSizeRange';
 import reactDom from 'react-dom';
-const {h} = React;
 
-import table from 'smart-table-core';
+import {smartTable} from 'smart-table-core';
 
-const t = table({data, tableState: {sort: {}, filter: {}, slice: {page: 1, size: 15}}});
+const t = smartTable({data, tableState: {sort: {}, filter: {}, slice: {page: 1, size: 15}}});
 
 class Table extends React.Component {
   constructor (props) {

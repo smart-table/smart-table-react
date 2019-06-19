@@ -1,21 +1,29 @@
 import node from 'rollup-plugin-node-resolve';
 import commonjs from "rollup-plugin-commonjs";
-import buble from 'rollup-plugin-buble';
 import replace  from 'rollup-plugin-replace';
+import buble from 'rollup-plugin-buble';
+
+const env = process.env.NODE_ENV;
 
 export default {
-  entry: "./example/index.js",
+  input: './example/index.js',
+  output: {
+    file: './example/bundle.js',
+    format: 'iife',
+    name: 'bundle',
+    sourcemap: 'inline',
+  },
   plugins: [
-    replace({"import reactDom from 'react-dom'":'const reactDom = React'}),
-    node({jsnext: true}),
-    commonjs(),
+    replace({
+      'onChange': 'onInput',
+      'process.env.NODE_ENV': JSON.stringify(env),
+      'react': 'preact',
+      'react-dom': 'preact',
+    }),
+    node(),
     buble({
-      target: {chrome: 52},
-      jsx: 'h'
-    })
+      target: {chrome: 71}
+    }),
+    commonjs(),
   ],
-  dest: "./example/bundle.js",
-  moduleName: "bundle",
-  format: "iife",
-  sourceMap: 'inline'
 };
